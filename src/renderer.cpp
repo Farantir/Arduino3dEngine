@@ -1,10 +1,11 @@
 #include <config.h>
 #include <renderer.h>
 #include <display.h>
+#include <triangle.h>
 
-void a3de::DrawTriangle(const scalar& x1, const scalar& y1, const scalar& x2, const scalar& y2, const scalar& x3, const scalar& y3)
+void a3de::DrawTriangle(const triangle& t)
 {
-    writeLine((int)x1, (int)y1, (int)x2, (int)y2);
-    writeLine((int)x1, (int)y1, (int)x3, (int)y3);
-    writeLine((int)x3, (int)y3, (int)x2, (int)y2);
+    if(t.display_flags & B00000001) writeLine((int)t.p[0].x, (int)t.p[0].y, (int)t.p[1].x, (int)t.p[1].y);
+    if(t.display_flags & B00000010) writeLine((int)t.p[0].x, (int)t.p[0].y, (int)t.p[2].x, (int)t.p[2].y);
+    if(t.display_flags & B00000100) writeLine((int)t.p[2].x, (int)t.p[2].y, (int)t.p[1].x, (int)t.p[1].y);
 }
