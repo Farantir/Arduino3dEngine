@@ -13,7 +13,7 @@ namespace a3de
 
     struct mat4x4
     {
-        scalar m[4][4] = { 0 };
+        scalar m[4][4] = {};
     };
 
     // math functions

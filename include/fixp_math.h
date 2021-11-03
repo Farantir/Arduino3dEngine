@@ -6,15 +6,26 @@ namespace a3de
 {
     class fixed16_t 
     {
-        public:
-            int16_t value;
-            explicit fixed16_t(int16_t);
-            //explicit fixed16_t(float);
+        // Constants for convenience. Should be evaluated at compile time.
+        static constexpr int16_t c_scaling_exp = 5;
+        static constexpr int16_t c_scaling_factor = 1 << c_scaling_exp;
+        /*
+            scaling factor used: 2^5
+            number representation: 1/2^5 = 1/32
+            error: < 0.016
+            min possible value:	−1024.000 00
+            max possible value:	+1023.968 75
+        */
+        public:            
+            explicit fixed16_t(const int16_t& value);
+            explicit fixed16_t(const float& value);
 
-            fixed16_t operator+(const fixed16_t&);
-            fixed16_t operator-(const fixed16_t&);
-            fixed16_t operator*(const fixed16_t&);
-            fixed16_t operator/(const fixed16_t&);
+            fixed16_t operator+(const fixed16_t& rhs) const;
+            fixed16_t operator-(const fixed16_t& rhs) const;
+            fixed16_t operator*(const fixed16_t& rhs) const;
+            fixed16_t operator/(const fixed16_t& rhs) const;
+        private:
+            int16_t m_value;
     };
 }
 
