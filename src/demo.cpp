@@ -3,6 +3,7 @@
 #include <config.h>
 #include <display.h>
 #include <renderer.h>
+#include <fixp_math.h>
 
 // globals
 

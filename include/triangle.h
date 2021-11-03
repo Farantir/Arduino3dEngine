@@ -1,6 +1,7 @@
 #ifndef _A3DE_TRIANGLE_H_
 #define _A3DE_TRIANGLE_H_
 #include <linalg.h>
+#include <stdint.h>
 
 namespace a3de
 {
@@ -12,7 +13,7 @@ namespace a3de
          * the first 3 bits denote the visibility of the individual edges, the other bytes are not specifyed by now.
          * could be used for opacity or effekts
          */
-        unsigned char display_flags;
+        uint8_t display_flags;
     };
 
     float mid_z(const a3de::triangle& t);
