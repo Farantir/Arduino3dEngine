@@ -39,6 +39,12 @@ a3de::triangle meshCube[] = {
 
     a3de::scalar fTheta;
 
+  a3de::scalar halve = 0.5f;
+  a3de::scalar twpointfive = 0.5f;
+  a3de::scalar one = 1.0f;
+  a3de::scalar fix_displayheight = DISPLAY_HEIGHT;
+  a3de::scalar fix_displaywidth = DISPLAY_WIDTH;
+
 void demo::demo_init()
 {
     // initialize display
@@ -48,23 +54,25 @@ void demo::demo_init()
     a3de::scalar fNear = 0.1f;
     a3de::scalar fFar = 1000.0f;
     a3de::scalar fFov = 90.0f;
-    a3de::scalar fAspectRatio = (float)DISPLAY_HEIGHT / (float)DISPLAY_WIDTH;
-    a3de::scalar fFovRad = 1.0f / tanf(fFov * 0.5f / 180.0f * 3.14159f);
+    a3de::scalar fAspectRatio = fix_displayheight / fix_displaywidth;
+    a3de::scalar fFovRad = a3de::scalar(1.0f) / a3de::scalar(tanf(fFov * halve / a3de::scalar(180.0f) * a3de::scalar(3.14159f)));
 
     matProj.m[0][0] = fAspectRatio * fFovRad;
     matProj.m[1][1] = fFovRad;
     matProj.m[2][2] = fFar / (fFar - fNear);
-    matProj.m[3][2] = (-fFar * fNear) / (fFar - fNear);
+    matProj.m[3][2] = (fFar * fNear * a3de::scalar(-1)) / (fFar - fNear);
     matProj.m[2][3] = 1.0f;
     matProj.m[3][3] = 0.0f;
 }
+
+a3de::scalar angle = 0.02f;
 
 void demo::demo_run()
 {
     a3de::display.clearDisplay();
   // Set up rotation matrices
     a3de::mat4x4 matRotZ, matRotX;
-    fTheta += 0.02f;
+    fTheta += angle;
 
     // Rotation Z
     matRotZ.m[0][0] = cosf(fTheta);
@@ -76,10 +84,10 @@ void demo::demo_run()
 
     // Rotation X
     matRotX.m[0][0] = 1;
-    matRotX.m[1][1] = cosf(fTheta * 0.5f);
-    matRotX.m[1][2] = sinf(fTheta * 0.5f);
-    matRotX.m[2][1] = -sinf(fTheta * 0.5f);
-    matRotX.m[2][2] = cosf(fTheta * 0.5f);
+    matRotX.m[1][1] = cosf(fTheta * halve);
+    matRotX.m[1][2] = sinf(fTheta * halve);
+    matRotX.m[2][1] = -sinf(fTheta * halve);
+    matRotX.m[2][2] = cosf(fTheta * halve);
     matRotX.m[3][3] = 1;
 
     // Draw Triangles
@@ -100,9 +108,9 @@ void demo::demo_run()
 
       // Offset into the screen
       triTranslated = triRotatedZX;
-      triTranslated.p[0].z = triRotatedZX.p[0].z + 2.5f;
-      triTranslated.p[1].z = triRotatedZX.p[1].z + 2.5f;
-      triTranslated.p[2].z = triRotatedZX.p[2].z + 2.5f;
+      triTranslated.p[0].z = triRotatedZX.p[0].z + twpointfive;
+      triTranslated.p[1].z = triRotatedZX.p[1].z + twpointfive;
+      triTranslated.p[2].z = triRotatedZX.p[2].z + twpointfive;
 
       // Project triangles from 3D --> 2D
       MultiplyMatrixVector(triTranslated.p[0], matProj, triProjected.p[0]);
@@ -110,15 +118,15 @@ void demo::demo_run()
       MultiplyMatrixVector(triTranslated.p[2], matProj, triProjected.p[2]);
 
       // Scale into view
-      triProjected.p[0].x += 1.0f; triProjected.p[0].y += 1.0f;
-      triProjected.p[1].x += 1.0f; triProjected.p[1].y += 1.0f;
-      triProjected.p[2].x += 1.0f; triProjected.p[2].y += 1.0f;
-      triProjected.p[0].x *= 0.5f * (float)DISPLAY_WIDTH;
-      triProjected.p[0].y *= 0.5f * (float)DISPLAY_HEIGHT;
-      triProjected.p[1].x *= 0.5f * (float)DISPLAY_WIDTH;
-      triProjected.p[1].y *= 0.5f * (float)DISPLAY_HEIGHT;
-      triProjected.p[2].x *= 0.5f * (float)DISPLAY_WIDTH;
-      triProjected.p[2].y *= 0.5f * (float)DISPLAY_HEIGHT;
+      triProjected.p[0].x += one; triProjected.p[0].y += one;
+      triProjected.p[1].x += one; triProjected.p[1].y += one;
+      triProjected.p[2].x += one; triProjected.p[2].y += one;
+      triProjected.p[0].x *= halve * fix_displaywidth;
+      triProjected.p[0].y *= halve * fix_displayheight;
+      triProjected.p[1].x *= halve * fix_displaywidth;
+      triProjected.p[1].y *= halve * fix_displayheight;
+      triProjected.p[2].x *= halve * fix_displaywidth;
+      triProjected.p[2].y *= halve * fix_displayheight;
 
       //copy over display information
       triProjected.display_flags = tri.display_flags;

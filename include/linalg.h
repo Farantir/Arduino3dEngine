@@ -1,10 +1,10 @@
 #ifndef _A3DE_LINALG_H_
 #define _A3DE_LINALG_H_
+#include <fixp_math.h>
 
 namespace a3de
 {
-    // TODO: replace with some fancy fixed point type
-    using scalar = float;
+    using scalar = fixed16_t;
 
     struct vec3d
     {

@@ -18,12 +18,18 @@ namespace a3de
         */
         public:            
             explicit fixed16_t(const int16_t& value);
-            explicit fixed16_t(const float& value);
+            fixed16_t(const float& value);
+            fixed16_t();
+            operator double() const;
+            operator int() const;
 
             fixed16_t operator+(const fixed16_t& rhs) const;
+            void operator+=(const fixed16_t& rhs);
             fixed16_t operator-(const fixed16_t& rhs) const;
             fixed16_t operator*(const fixed16_t& rhs) const;
+            void operator*=(const fixed16_t& rhs);
             fixed16_t operator/(const fixed16_t& rhs) const;
+            void operator/=(const fixed16_t& rhs);
         private:
             int16_t m_value;
     };
