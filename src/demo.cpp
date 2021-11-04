@@ -7,7 +7,7 @@
 
 // globals
 
-a3de::triangle meshCube[] = {
+constexpr a3de::triangle meshCube[] = {
   
       // SOUTH
       { 0.0f, 0.0f, 0.0f,    0.0f, 1.0f, 0.0f,    1.0f, 1.0f, 0.0f, B00000101 },
@@ -39,11 +39,11 @@ a3de::triangle meshCube[] = {
 
     a3de::scalar fTheta;
 
-  a3de::scalar halve = 0.5f;
-  a3de::scalar twpointfive = 0.5f;
-  a3de::scalar one = 1.0f;
-  a3de::scalar fix_displayheight = DISPLAY_HEIGHT;
-  a3de::scalar fix_displaywidth = DISPLAY_WIDTH;
+  constexpr a3de::scalar halve = 0.5_f16;
+  constexpr a3de::scalar twpointfive = 0.5_f16;
+  constexpr a3de::scalar one = 1.0_f16;
+  constexpr a3de::scalar fix_displayheight = DISPLAY_HEIGHT;
+  constexpr a3de::scalar fix_displaywidth = DISPLAY_WIDTH;
 
 void demo::demo_init()
 {
@@ -51,21 +51,21 @@ void demo::demo_init()
     a3de::display_init();
 
     // Projection Matrix
-    a3de::scalar fNear = 0.1f;
-    a3de::scalar fFar = 1000.0f;
-    a3de::scalar fFov = 90.0f;
-    a3de::scalar fAspectRatio = fix_displayheight / fix_displaywidth;
-    a3de::scalar fFovRad = a3de::scalar(1.0f) / a3de::scalar(tanf(fFov * halve / a3de::scalar(180.0f) * a3de::scalar(3.14159f)));
+    constexpr a3de::scalar fNear = 0.1f;
+    constexpr a3de::scalar fFar = 1000.0f;
+    constexpr a3de::scalar fFov = 90.0f;
+    constexpr a3de::scalar fAspectRatio = fix_displayheight / fix_displaywidth;
+    a3de::scalar fFovRad = 1.0_f16 / a3de::scalar((float)tanf(fFov * halve / 180.0_f16 * 3.14159_f16));
 
     matProj.m[0][0] = fAspectRatio * fFovRad;
     matProj.m[1][1] = fFovRad;
     matProj.m[2][2] = fFar / (fFar - fNear);
-    matProj.m[3][2] = (fFar * fNear * a3de::scalar(-1)) / (fFar - fNear);
+    matProj.m[3][2] = (fFar * fNear * -1_f16) / (fFar - fNear);
     matProj.m[2][3] = 1.0f;
     matProj.m[3][3] = 0.0f;
 }
 
-a3de::scalar angle = 0.02f;
+constexpr a3de::scalar angle = 0.02f;
 
 void demo::demo_run()
 {
