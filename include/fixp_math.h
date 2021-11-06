@@ -7,7 +7,7 @@ namespace a3de
     class fixed16_t 
     {
         // Constants for convenience. Should be evaluated at compile time.
-        static constexpr int16_t c_scaling_exp = 4;
+        static constexpr int16_t c_scaling_exp = 5;
         static constexpr int16_t c_scaling_factor = 1 << c_scaling_exp;
         /*
             scaling factor used: 2^5
