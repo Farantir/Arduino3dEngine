@@ -7,7 +7,7 @@ namespace a3de
     class fixed16_t 
     {
         // Constants for convenience. Should be evaluated at compile time.
-        static constexpr int16_t c_scaling_exp = 5;
+        static constexpr int16_t c_scaling_exp = 4;
         static constexpr int16_t c_scaling_factor = 1 << c_scaling_exp;
         /*
             scaling factor used: 2^5
@@ -108,7 +108,7 @@ constexpr a3de::fixed16_t a3de::fixed16_t::operator*(const fixed16_t& n) const
     */
 
     //the used scalingfactors are booth 2^5 -> therefore the result needs to be divided by 2^5
-    return fixed16_t(static_cast<int16_t>((m_value * n.m_value) / c_scaling_factor));
+    return fixed16_t(static_cast<int16_t>((static_cast<int32_t>(m_value) * n.m_value) / c_scaling_factor));
 }
 
 constexpr a3de::fixed16_t a3de::fixed16_t::operator/(const fixed16_t& n) const
@@ -138,7 +138,8 @@ constexpr a3de::fixed16_t a3de::fixed16_t::operator/(const fixed16_t& n) const
     */
 
     //the used scalingfactors are booth 2^5 -> therefore the result needs to be multiplyed by 2^5
-    return fixed16_t(static_cast<int16_t>((m_value / n.m_value) * c_scaling_factor));
+    //int32_t intermediate = m_value * c_scaling_factor;
+    return fixed16_t(static_cast<int16_t>((static_cast<int32_t>(m_value) * c_scaling_factor) / n.m_value));
 }
 
 constexpr a3de::fixed16_t a3de::operator"" _f16(long double value) noexcept

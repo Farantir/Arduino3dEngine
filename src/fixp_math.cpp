@@ -35,7 +35,8 @@ void a3de::fixed16_t::operator*=(const fixed16_t& n)
     */
 
     //the used scalingfactors are booth 2^5 -> therefore the result needs to be divided by 2^5
-    m_value = (m_value * n.m_value) / c_scaling_factor;
+    int32_t intermediate = m_value * n.m_value;
+    m_value = intermediate / c_scaling_factor;
 }
 
 
@@ -66,5 +67,6 @@ void a3de::fixed16_t::operator/=(const fixed16_t& n)
     */
 
     //the used scalingfactors are booth 2^5 -> therefore the result needs to be multiplyed by 2^5
-    m_value = (m_value / n.m_value) * c_scaling_factor;
+    int32_t intermediate = m_value * c_scaling_factor;
+    m_value = intermediate / n.m_value;
 }

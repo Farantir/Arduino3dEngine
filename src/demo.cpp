@@ -10,28 +10,28 @@
 constexpr a3de::triangle meshCube[] = {
   
       // SOUTH
-      { 0.0f, 0.0f, 0.0f,    0.0f, 1.0f, 0.0f,    1.0f, 1.0f, 0.0f, B00000101 },
-      { 0.0f, 0.0f, 0.0f,    1.0f, 1.0f, 0.0f,    1.0f, 0.0f, 0.0f, B00000110 },
+      { 0.0_f16, 0.0_f16, 0.0_f16,    0.0_f16, 1.0_f16, 0.0_f16,    1.0_f16, 1.0_f16, 0.0_f16, B00000101 },
+      { 0.0_f16, 0.0_f16, 0.0_f16,    1.0_f16, 1.0_f16, 0.0_f16,    1.0_f16, 0.0_f16, 0.0_f16, B00000110 },
   
       // EAST                                                      
-      { 1.0f, 0.0f, 0.0f,    1.0f, 1.0f, 0.0f,    1.0f, 1.0f, 1.0f, B00000100 },
-      { 1.0f, 0.0f, 0.0f,    1.0f, 1.0f, 1.0f,    1.0f, 0.0f, 1.0f, B00000110 },
+      { 1.0_f16, 0.0_f16, 0.0_f16,    1.0_f16, 1.0_f16, 0.0_f16,    1.0_f16, 1.0_f16, 1.0_f16, B00000100 },
+      { 1.0_f16, 0.0_f16, 0.0_f16,    1.0_f16, 1.0_f16, 1.0_f16,    1.0_f16, 0.0_f16, 1.0_f16, B00000110 },
   
       // NORTH                                                     
-      { 1.0f, 0.0f, 1.0f,    1.0f, 1.0f, 1.0f,    0.0f, 1.0f, 1.0f, B00000100 },
-      { 1.0f, 0.0f, 1.0f,    0.0f, 1.0f, 1.0f,    0.0f, 0.0f, 1.0f, B00000110 },
+      { 1.0_f16, 0.0_f16, 1.0_f16,    1.0_f16, 1.0_f16, 1.0_f16,    0.0_f16, 1.0_f16, 1.0_f16, B00000100 },
+      { 1.0_f16, 0.0_f16, 1.0_f16,    0.0_f16, 1.0_f16, 1.0_f16,    0.0_f16, 0.0_f16, 1.0_f16, B00000110 },
   
       // WEST                                                      
-      { 0.0f, 0.0f, 1.0f,    0.0f, 1.0f, 1.0f,    0.0f, 1.0f, 0.0f, B00000100 },
-      { 0.0f, 0.0f, 1.0f,    0.0f, 1.0f, 0.0f,    0.0f, 0.0f, 0.0f, B00000110 },
+      { 0.0_f16, 0.0_f16, 1.0_f16,    0.0_f16, 1.0_f16, 1.0_f16,    0.0_f16, 1.0_f16, 0.0_f16, B00000100 },
+      { 0.0_f16, 0.0_f16, 1.0_f16,    0.0_f16, 1.0_f16, 0.0_f16,    0.0_f16, 0.0_f16, 0.0_f16, B00000110 },
   
       // TOP                                                       
-      { 0.0f, 1.0f, 0.0f,    0.0f, 1.0f, 1.0f,    1.0f, 1.0f, 1.0f, B00000000 },
-      { 0.0f, 1.0f, 0.0f,    1.0f, 1.0f, 1.0f,    1.0f, 1.0f, 0.0f, B00000000 },
+      { 0.0_f16, 1.0_f16, 0.0_f16,    0.0_f16, 1.0_f16, 1.0_f16,    1.0_f16, 1.0_f16, 1.0_f16, B00000000 },
+      { 0.0_f16, 1.0_f16, 0.0_f16,    1.0_f16, 1.0_f16, 1.0_f16,    1.0_f16, 1.0_f16, 0.0_f16, B00000000 },
   
       // BOTTOM                                                    
-      { 1.0f, 0.0f, 1.0f,    0.0f, 0.0f, 1.0f,    0.0f, 0.0f, 0.0f, B00000000 },
-      { 1.0f, 0.0f, 1.0f,    0.0f, 0.0f, 0.0f,    1.0f, 0.0f, 0.0f, B00000000 },
+      { 1.0_f16, 0.0_f16, 1.0_f16,    0.0_f16, 0.0_f16, 1.0_f16,    0.0_f16, 0.0_f16, 0.0_f16, B00000000 },
+      { 1.0_f16, 0.0_f16, 1.0_f16,    0.0_f16, 0.0_f16, 0.0_f16,    1.0_f16, 0.0_f16, 0.0_f16, B00000000 },
   
     };
 
@@ -39,9 +39,6 @@ constexpr a3de::triangle meshCube[] = {
 
     a3de::scalar fTheta;
 
-  constexpr a3de::scalar halve = 0.5_f16;
-  constexpr a3de::scalar twpointfive = 0.5_f16;
-  constexpr a3de::scalar one = 1.0_f16;
   constexpr a3de::scalar fix_displayheight = DISPLAY_HEIGHT;
   constexpr a3de::scalar fix_displaywidth = DISPLAY_WIDTH;
 
@@ -51,21 +48,21 @@ void demo::demo_init()
     a3de::display_init();
 
     // Projection Matrix
-    constexpr a3de::scalar fNear = 0.1f;
-    constexpr a3de::scalar fFar = 1000.0f;
-    constexpr a3de::scalar fFov = 90.0f;
-    constexpr a3de::scalar fAspectRatio = fix_displayheight / fix_displaywidth;
-    a3de::scalar fFovRad = 1.0_f16 / a3de::scalar((float)tanf(fFov * halve / 180.0_f16 * 3.14159_f16));
+    constexpr a3de::scalar fNear = 0.1_f16;
+    constexpr a3de::scalar fFar = 1000.0_f16;
+    constexpr a3de::scalar fFov = 90.0_f16;
+    constexpr a3de::scalar fAspectRatio = static_cast<float>(fix_displayheight) / static_cast<float>(fix_displaywidth);
+    a3de::scalar fFovRad = 1.0_f16 / a3de::scalar((float)tanf(fFov * 0.5_f16 / 180.0_f16 * 3.14159_f16));
 
     matProj.m[0][0] = fAspectRatio * fFovRad;
     matProj.m[1][1] = fFovRad;
     matProj.m[2][2] = fFar / (fFar - fNear);
-    matProj.m[3][2] = (fFar * fNear * -1_f16) / (fFar - fNear);
-    matProj.m[2][3] = 1.0f;
-    matProj.m[3][3] = 0.0f;
+    matProj.m[3][2] = (fFar * fNear * -1.0_f16) / (fFar - fNear);
+    matProj.m[2][3] = 1.0_f16;
+    matProj.m[3][3] = 0.0_f16;
 }
 
-constexpr a3de::scalar angle = 0.02f;
+constexpr a3de::scalar angle = 0.02_f16;
 
 void demo::demo_run()
 {
@@ -79,16 +76,16 @@ void demo::demo_run()
     matRotZ.m[0][1] = sinf(fTheta);
     matRotZ.m[1][0] = -sinf(fTheta);
     matRotZ.m[1][1] = cosf(fTheta);
-    matRotZ.m[2][2] = 1;
-    matRotZ.m[3][3] = 1;
+    matRotZ.m[2][2] = 1.0_f16;
+    matRotZ.m[3][3] = 1.0_f16;
 
     // Rotation X
-    matRotX.m[0][0] = 1;
-    matRotX.m[1][1] = cosf(fTheta * halve);
-    matRotX.m[1][2] = sinf(fTheta * halve);
-    matRotX.m[2][1] = -sinf(fTheta * halve);
-    matRotX.m[2][2] = cosf(fTheta * halve);
-    matRotX.m[3][3] = 1;
+    matRotX.m[0][0] = 1.0_f16;
+    matRotX.m[1][1] = cosf(fTheta * 0.5_f16);
+    matRotX.m[1][2] = sinf(fTheta * 0.5_f16);
+    matRotX.m[2][1] = -sinf(fTheta * 0.5_f16);
+    matRotX.m[2][2] = cosf(fTheta * 0.5_f16);
+    matRotX.m[3][3] = 1.0_f16;
 
     // Draw Triangles
     for (auto tri : meshCube)
@@ -108,9 +105,9 @@ void demo::demo_run()
 
       // Offset into the screen
       triTranslated = triRotatedZX;
-      triTranslated.p[0].z = triRotatedZX.p[0].z + twpointfive;
-      triTranslated.p[1].z = triRotatedZX.p[1].z + twpointfive;
-      triTranslated.p[2].z = triRotatedZX.p[2].z + twpointfive;
+      triTranslated.p[0].z = triRotatedZX.p[0].z + 2.5_f16;;
+      triTranslated.p[1].z = triRotatedZX.p[1].z + 2.5_f16;;
+      triTranslated.p[2].z = triRotatedZX.p[2].z + 2.5_f16;;
 
       // Project triangles from 3D --> 2D
       MultiplyMatrixVector(triTranslated.p[0], matProj, triProjected.p[0]);
@@ -118,15 +115,15 @@ void demo::demo_run()
       MultiplyMatrixVector(triTranslated.p[2], matProj, triProjected.p[2]);
 
       // Scale into view
-      triProjected.p[0].x += one; triProjected.p[0].y += one;
-      triProjected.p[1].x += one; triProjected.p[1].y += one;
-      triProjected.p[2].x += one; triProjected.p[2].y += one;
-      triProjected.p[0].x *= halve * fix_displaywidth;
-      triProjected.p[0].y *= halve * fix_displayheight;
-      triProjected.p[1].x *= halve * fix_displaywidth;
-      triProjected.p[1].y *= halve * fix_displayheight;
-      triProjected.p[2].x *= halve * fix_displaywidth;
-      triProjected.p[2].y *= halve * fix_displayheight;
+      triProjected.p[0].x += 1.0_f16; triProjected.p[0].y += 1.0_f16;
+      triProjected.p[1].x += 1.0_f16; triProjected.p[1].y += 1.0_f16;
+      triProjected.p[2].x += 1.0_f16; triProjected.p[2].y += 1.0_f16;
+      triProjected.p[0].x *= 0.5_f16 * fix_displaywidth;
+      triProjected.p[0].y *= 0.5_f16 * fix_displayheight;
+      triProjected.p[1].x *= 0.5_f16 * fix_displaywidth;
+      triProjected.p[1].y *= 0.5_f16 * fix_displayheight;
+      triProjected.p[2].x *= 0.5_f16 * fix_displaywidth;
+      triProjected.p[2].y *= 0.5_f16 * fix_displayheight;
 
       //copy over display information
       triProjected.display_flags = tri.display_flags;
