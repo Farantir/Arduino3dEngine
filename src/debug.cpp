@@ -4,32 +4,32 @@
 #include <fixp_math.h>
 #include <linalg.h>
 #include <triangle.h>
-
+int display[DISPLAY_HEIGHT][DISPLAY_WIDTH];
 constexpr a3de::triangle meshCube[] = {
   
       // SOUTH
-      { 0.0_f16, 0.0_f16, 0.0_f16,    0.0_f16, 1.0_f16, 0.0_f16,    1.0_f16, 1.0_f16, 0.0_f16, 1 },
-      { 0.0_f16, 0.0_f16, 0.0_f16,    1.0_f16, 1.0_f16, 0.0_f16,    1.0_f16, 0.0_f16, 0.0_f16, 1 },
+      { 0.0_f16, 0.0_f16, 0.0_f16,    0.0_f16, 1.0_f16, 0.0_f16,    1.0_f16, 1.0_f16, 0.0_f16, 5 },
+      { 0.0_f16, 0.0_f16, 0.0_f16,    1.0_f16, 1.0_f16, 0.0_f16,    1.0_f16, 0.0_f16, 0.0_f16, 6 },
   
       // EAST                                                      
-      { 1.0_f16, 0.0_f16, 0.0_f16,    1.0_f16, 1.0_f16, 0.0_f16,    1.0_f16, 1.0_f16, 1.0_f16, 1 },
-      { 1.0_f16, 0.0_f16, 0.0_f16,    1.0_f16, 1.0_f16, 1.0_f16,    1.0_f16, 0.0_f16, 1.0_f16, 1 },
+      { 1.0_f16, 0.0_f16, 0.0_f16,    1.0_f16, 1.0_f16, 0.0_f16,    1.0_f16, 1.0_f16, 1.0_f16, 4 },
+      { 1.0_f16, 0.0_f16, 0.0_f16,    1.0_f16, 1.0_f16, 1.0_f16,    1.0_f16, 0.0_f16, 1.0_f16, 6 },
   
       // NORTH                                                     
-      { 1.0_f16, 0.0_f16, 1.0_f16,    1.0_f16, 1.0_f16, 1.0_f16,    0.0_f16, 1.0_f16, 1.0_f16, 1 },
-      { 1.0_f16, 0.0_f16, 1.0_f16,    0.0_f16, 1.0_f16, 1.0_f16,    0.0_f16, 0.0_f16, 1.0_f16, 1 },
+      { 1.0_f16, 0.0_f16, 1.0_f16,    1.0_f16, 1.0_f16, 1.0_f16,    0.0_f16, 1.0_f16, 1.0_f16, 4 },
+      { 1.0_f16, 0.0_f16, 1.0_f16,    0.0_f16, 1.0_f16, 1.0_f16,    0.0_f16, 0.0_f16, 1.0_f16, 6 },
   
       // WEST                                                      
-      { 0.0_f16, 0.0_f16, 1.0_f16,    0.0_f16, 1.0_f16, 1.0_f16,    0.0_f16, 1.0_f16, 0.0_f16, 1 },
-      { 0.0_f16, 0.0_f16, 1.0_f16,    0.0_f16, 1.0_f16, 0.0_f16,    0.0_f16, 0.0_f16, 0.0_f16, 1 },
+      { 0.0_f16, 0.0_f16, 1.0_f16,    0.0_f16, 1.0_f16, 1.0_f16,    0.0_f16, 1.0_f16, 0.0_f16, 4 },
+      { 0.0_f16, 0.0_f16, 1.0_f16,    0.0_f16, 1.0_f16, 0.0_f16,    0.0_f16, 0.0_f16, 0.0_f16, 6 },
   
       // TOP                                                       
-      { 0.0_f16, 1.0_f16, 0.0_f16,    0.0_f16, 1.0_f16, 1.0_f16,    1.0_f16, 1.0_f16, 1.0_f16, 1 },
-      { 0.0_f16, 1.0_f16, 0.0_f16,    1.0_f16, 1.0_f16, 1.0_f16,    1.0_f16, 1.0_f16, 0.0_f16, 1 },
+      { 0.0_f16, 1.0_f16, 0.0_f16,    0.0_f16, 1.0_f16, 1.0_f16,    1.0_f16, 1.0_f16, 1.0_f16, 0 },
+      { 0.0_f16, 1.0_f16, 0.0_f16,    1.0_f16, 1.0_f16, 1.0_f16,    1.0_f16, 1.0_f16, 0.0_f16, 0 },
   
       // BOTTOM                                                    
-      { 1.0_f16, 0.0_f16, 1.0_f16,    0.0_f16, 0.0_f16, 1.0_f16,    0.0_f16, 0.0_f16, 0.0_f16, 1 },
-      { 1.0_f16, 0.0_f16, 1.0_f16,    0.0_f16, 0.0_f16, 0.0_f16,    1.0_f16, 0.0_f16, 0.0_f16, 1 },
+      { 1.0_f16, 0.0_f16, 1.0_f16,    0.0_f16, 0.0_f16, 1.0_f16,    0.0_f16, 0.0_f16, 0.0_f16, 0 },
+      { 1.0_f16, 0.0_f16, 1.0_f16,    0.0_f16, 0.0_f16, 0.0_f16,    1.0_f16, 0.0_f16, 0.0_f16, 0 },
   
     };
 
@@ -47,7 +47,7 @@ void demo_init()
     constexpr a3de::scalar fNear = 0.1_f16;
     constexpr a3de::scalar fFar = 1000.0_f16;
     constexpr a3de::scalar fFov = 90.0_f16;
-    constexpr a3de::scalar fAspectRatio = static_cast<float>(fix_displayheight) / static_cast<float>(fix_displaywidth);
+    constexpr a3de::scalar fAspectRatio = fix_displayheight / fix_displaywidth;
     a3de::scalar fFovRad = 1.0_f16 / a3de::scalar((float)tanf(fFov * 0.5_f16 / 180.0_f16 * 3.14159_f16));
 
     matProj.m[0][0] = fAspectRatio * fFovRad;
@@ -58,24 +58,155 @@ void demo_init()
     matProj.m[3][3] = 0.0_f16;
 
 
-    std::cout << "fNear: " << (int)fNear << std::endl;
-    std::cout << "fFar: " << (int)fFar << std::endl;
-    std::cout << "fFov: " << (int)fFov << std::endl;
-    std::cout << "fAspectRatio: " << (int)fAspectRatio << std::endl;
-    std::cout << "fFovRad: " << (int)fFovRad << std::endl;
-    std::cout << "matProj.m[0][0]: " << (int)matProj.m[0][0] << std::endl;
-    std::cout << "matProj.m[1][1]: " << (int)matProj.m[1][1] << std::endl;
-    std::cout << "matProj.m[2][2]: " << (int)matProj.m[2][2] << std::endl;
-    std::cout << "matProj.m[3][2]: " << (int)matProj.m[3][2] << std::endl;
-    std::cout << "matProj.m[2][3]: " << (int)matProj.m[2][3] << std::endl;
-    std::cout << "matProj.m[3][3]: " << (int)matProj.m[3][3] << std::endl;
+    std::cout << "fNear: " << (float)fNear << std::endl;
+    std::cout << "fFar: " << (float)fFar << std::endl;
+    std::cout << "fFov: " << (float)fFov << std::endl;
+    std::cout << "fAspectRatio: " << (float)fAspectRatio << std::endl;
+    std::cout << "fFovRad: " << (float)fFovRad << std::endl;
+    std::cout << "matProj.m[0][0]: " << (float)matProj.m[0][0] << std::endl;
+    std::cout << "matProj.m[1][1]: " << (float)matProj.m[1][1] << std::endl;
+    std::cout << "matProj.m[2][2]: " << (float)matProj.m[2][2] << std::endl;
+    std::cout << "matProj.m[3][2]: " << (float)matProj.m[3][2] << std::endl;
+    std::cout << "matProj.m[2][3]: " << (float)matProj.m[2][3] << std::endl;
+    std::cout << "matProj.m[3][3]: " << (float)matProj.m[3][3] << std::endl;
 
 }
 
-constexpr a3de::scalar angle = 0.02_f16;
+//log a triangle
+void logTriangle(a3de::triangle t)
+{
+  std::cout << "triangle.p[0].x: " << (float)t.p[0].x << std::endl;
+  std::cout << "triangle.p[0].y: " << (float)t.p[0].y << std::endl;
+  std::cout << "triangle.p[0].z: " << (float)t.p[0].z << std::endl;
+  std::cout << "triangle.p[1].x: " << (float)t.p[1].x << std::endl;
+  std::cout << "triangle.p[1].y: " << (float)t.p[1].y << std::endl;
+  std::cout << "triangle.p[1].z: " << (float)t.p[1].z << std::endl;
+  std::cout << "triangle.p[2].x: " << (float)t.p[2].x << std::endl;
+  std::cout << "triangle.p[2].y: " << (float)t.p[2].y << std::endl;
+  std::cout << "triangle.p[2].z: " << (float)t.p[2].z << std::endl;
+  std::cout << "triangle.display_flags: " << (float)t.display_flags << std::endl;
+}
+
+constexpr a3de::scalar angle = 0.1_f16;
+
+void renderDisplay()
+{
+  for(int j = 0; j < DISPLAY_WIDTH; j++)
+  {
+    std::cout << "__";
+  }
+  std::cout << "_" << std::endl;
+
+  for(int i = 0; i < DISPLAY_HEIGHT; i++)
+  {
+    std::cout << "|";
+    for(int j = 0; j < DISPLAY_WIDTH; j++)
+    {
+      if(display[i][j] == 1)
+      {
+        std::cout << "* ";
+      }
+      else
+      {
+        std::cout << "  ";
+      }
+    }
+    std::cout << "|" << std::endl;
+  }
+
+  std::cout << "|";
+  for(int j = 0; j < DISPLAY_WIDTH; j++)
+  {
+    std::cout << "__";
+  }
+  std::cout << "|" << std::endl;
+
+}
+
+void clearDisplay()
+{
+  
+  for (int i = 0; i < DISPLAY_HEIGHT; i++)
+  {
+    for (int j = 0; j < DISPLAY_WIDTH; j++)
+    {
+      display[i][j] = 0;
+    }
+  }
+}
+
+//swaps two int values
+void swap(int &a, int &b)
+{
+  int temp = a;
+  a = b;
+  b = temp;
+}
+
+// TODO: We could move the four locations to the data segment and save stack memory:
+// static display_coord sx0, sx1, sy0, sy1;
+// And pass the coordinate values by reference.
+void writeLine(int x0, int y0, int x1, int y1)
+{
+  bool steep = abs(y1 - y0) > abs(x1 - x0);
+  if (steep)
+  {
+    swap(x0, y0);
+    swap(x1, y1);
+  }
+
+  if (x0 > x1)
+  {
+    swap(x0, x1);
+    swap(y0, y1);
+  }
+
+  int dx, dy;
+  dx = x1 - x0;
+  dy = abs(y1 - y0);
+
+  int err = dx / 2;
+  int ystep;
+
+  if (y0 < y1)
+  {
+    ystep = 1;
+  }
+  else
+  {
+    ystep = -1;
+  }
+
+  for (; x0 <= x1; x0++)
+  {
+    if (steep)
+    {
+      display[y0][x0] = 1;
+    } 
+    else
+    {
+      display[x0][y0] = 1;
+    }
+    err -= dy;
+    if (err < 0)
+    {
+      y0 += ystep;
+      err += dx;
+    }
+  }
+}
+
+void DrawTriangle(const a3de::triangle& t)
+{
+    if(t.display_flags & 1) writeLine((int)t.p[0].x, (int)t.p[0].y, (int)t.p[1].x, (int)t.p[1].y);
+    if(t.display_flags & 2) writeLine((int)t.p[0].x, (int)t.p[0].y, (int)t.p[2].x, (int)t.p[2].y);
+    if(t.display_flags & 4) writeLine((int)t.p[2].x, (int)t.p[2].y, (int)t.p[1].x, (int)t.p[1].y);
+}
 
 void demo_run()
 {
+  clearDisplay();
+
   // Set up rotation matrices
     a3de::mat4x4 matRotZ, matRotX;
     fTheta += angle;
@@ -95,6 +226,28 @@ void demo_run()
     matRotX.m[2][1] = -sinf(fTheta * 0.5_f16);
     matRotX.m[2][2] = cosf(fTheta * 0.5_f16);
     matRotX.m[3][3] = 1.0_f16;
+
+    //log  fTheta
+    std::cout << "fTheta: " << (float)fTheta << std::endl;
+
+    //log matRotZ
+    std::cout << "matRotZ.m[0][0]: " << (float)matRotZ.m[0][0] << std::endl;
+    std::cout << "matRotZ.m[0][1]: " << (float)matRotZ.m[0][1] << std::endl;
+    std::cout << "matRotZ.m[1][0]: " << (float)matRotZ.m[1][0] << std::endl;
+    std::cout << "matRotZ.m[1][1]: " << (float)matRotZ.m[1][1] << std::endl;
+    std::cout << "matRotZ.m[2][2]: " << (float)matRotZ.m[2][2] << std::endl;
+    std::cout << "matRotZ.m[3][3]: " << (float)matRotZ.m[3][3] << std::endl;
+
+    //log matRotX
+    std::cout << "matRotX.m[0][0]: " << (float)matRotX.m[0][0] << std::endl;
+    std::cout << "matRotX.m[0][1]: " << (float)matRotX.m[0][1] << std::endl;
+    std::cout << "matRotX.m[0][2]: " << (float)matRotX.m[0][2] << std::endl;
+    std::cout << "matRotX.m[1][1]: " << (float)matRotX.m[1][1] << std::endl;
+    std::cout << "matRotX.m[1][2]: " << (float)matRotX.m[1][2] << std::endl;
+    std::cout << "matRotX.m[2][1]: " << (float)matRotX.m[2][1] << std::endl;
+    std::cout << "matRotX.m[2][2]: " << (float)matRotX.m[2][2] << std::endl;
+    std::cout << "matRotX.m[3][3]: " << (float)matRotX.m[3][3] << std::endl;
+
 
     // Draw Triangles
     for (auto tri : meshCube)
@@ -137,12 +290,31 @@ void demo_run()
       //copy over display information
       triProjected.display_flags = tri.display_flags;
 
-    }
+      logTriangle(tri);
+      logTriangle(triProjected);
+      logTriangle(triTranslated);
 
+      std::cout << "" << std::endl << std::endl;
+
+      DrawTriangle(triProjected);
+
+    }
+  renderDisplay();
+}
+
+//wait for enter
+void waitForEnter()
+{
+  std::cout << "Press ENTER to continue...";
+  std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
 int main()
 {
     demo_init();
-    demo_run();
+    while(1) 
+    {
+      demo_run();
+      waitForEnter();
+    }
 }
