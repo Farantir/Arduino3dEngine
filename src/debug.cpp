@@ -105,7 +105,7 @@ void renderDisplay()
     {
       if(display[i][j] == 1)
       {
-        std::cout << "* ";
+        std::cout << "▒▒";
       }
       else
       {
