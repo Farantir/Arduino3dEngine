@@ -62,29 +62,30 @@ void demo_init()
     std::cout << "fFar: " << (float)fFar << std::endl;
     std::cout << "fFov: " << (float)fFov << std::endl;
     std::cout << "fAspectRatio: " << (float)fAspectRatio << std::endl;
-    std::cout << "fFovRad: " << (float)fFovRad << std::endl;
+    std::cout << "fFovRad: " << (float)fFovRad << std::endl << std::endl;
     std::cout << "matProj.m[0][0]: " << (float)matProj.m[0][0] << std::endl;
     std::cout << "matProj.m[1][1]: " << (float)matProj.m[1][1] << std::endl;
     std::cout << "matProj.m[2][2]: " << (float)matProj.m[2][2] << std::endl;
     std::cout << "matProj.m[3][2]: " << (float)matProj.m[3][2] << std::endl;
     std::cout << "matProj.m[2][3]: " << (float)matProj.m[2][3] << std::endl;
-    std::cout << "matProj.m[3][3]: " << (float)matProj.m[3][3] << std::endl;
+    std::cout << "matProj.m[3][3]: " << (float)matProj.m[3][3] << std::endl <<std::endl;
 
 }
 
 //log a triangle
 void logTriangle(a3de::triangle t)
 {
-  std::cout << "triangle.p[0].x: " << (float)t.p[0].x << std::endl;
-  std::cout << "triangle.p[0].y: " << (float)t.p[0].y << std::endl;
-  std::cout << "triangle.p[0].z: " << (float)t.p[0].z << std::endl;
-  std::cout << "triangle.p[1].x: " << (float)t.p[1].x << std::endl;
-  std::cout << "triangle.p[1].y: " << (float)t.p[1].y << std::endl;
-  std::cout << "triangle.p[1].z: " << (float)t.p[1].z << std::endl;
-  std::cout << "triangle.p[2].x: " << (float)t.p[2].x << std::endl;
-  std::cout << "triangle.p[2].y: " << (float)t.p[2].y << std::endl;
-  std::cout << "triangle.p[2].z: " << (float)t.p[2].z << std::endl;
-  std::cout << "triangle.display_flags: " << (float)t.display_flags << std::endl;
+  printf("x: %10f ",(float)t.p[0].x);
+  printf("y: %10f ",(float)t.p[0].y);
+  printf("z: %10f \n",(float)t.p[0].z);
+
+  printf("x: %10f ",(float)t.p[1].x);
+  printf("y: %10f ",(float)t.p[1].y);
+  printf("z: %10f \n",(float)t.p[1].z);
+
+  printf("x: %10f ",(float)t.p[2].x);
+  printf("y: %10f ",(float)t.p[2].y);
+  printf("z: %10f \n",(float)t.p[2].z);
 }
 
 constexpr a3de::scalar angle = 0.1_f16;
@@ -228,7 +229,7 @@ void demo_run()
     matRotX.m[3][3] = 1.0_f16;
 
     //log  fTheta
-    std::cout << "fTheta: " << (float)fTheta << std::endl;
+    std::cout << "fTheta: " << (float)fTheta << std::endl << std::endl;
 
     //log matRotZ
     std::cout << "matRotZ.m[0][0]: " << (float)matRotZ.m[0][0] << std::endl;
@@ -236,7 +237,7 @@ void demo_run()
     std::cout << "matRotZ.m[1][0]: " << (float)matRotZ.m[1][0] << std::endl;
     std::cout << "matRotZ.m[1][1]: " << (float)matRotZ.m[1][1] << std::endl;
     std::cout << "matRotZ.m[2][2]: " << (float)matRotZ.m[2][2] << std::endl;
-    std::cout << "matRotZ.m[3][3]: " << (float)matRotZ.m[3][3] << std::endl;
+    std::cout << "matRotZ.m[3][3]: " << (float)matRotZ.m[3][3] << std::endl << std::endl;
 
     //log matRotX
     std::cout << "matRotX.m[0][0]: " << (float)matRotX.m[0][0] << std::endl;
@@ -246,7 +247,7 @@ void demo_run()
     std::cout << "matRotX.m[1][2]: " << (float)matRotX.m[1][2] << std::endl;
     std::cout << "matRotX.m[2][1]: " << (float)matRotX.m[2][1] << std::endl;
     std::cout << "matRotX.m[2][2]: " << (float)matRotX.m[2][2] << std::endl;
-    std::cout << "matRotX.m[3][3]: " << (float)matRotX.m[3][3] << std::endl;
+    std::cout << "matRotX.m[3][3]: " << (float)matRotX.m[3][3] << std::endl << std::endl;
 
 
     // Draw Triangles
@@ -290,8 +291,11 @@ void demo_run()
       //copy over display information
       triProjected.display_flags = tri.display_flags;
 
+      std::cout << "Unchanged Triangle" << std::endl;
       logTriangle(tri);
+      std::cout << std::endl << "Projekted Triangle" << std::endl;
       logTriangle(triProjected);
+      std::cout << std::endl << "Translated Triangle" << std::endl;
       logTriangle(triTranslated);
 
       std::cout << "" << std::endl << std::endl;
@@ -312,8 +316,12 @@ void waitForEnter()
 int main()
 {
     demo_init();
+    int frame = 0;
     while(1) 
     {
+      frame ++;
+
+      std::cout << std::endl << std::endl << "Frame: " << frame << std::endl;
       demo_run();
       waitForEnter();
     }
